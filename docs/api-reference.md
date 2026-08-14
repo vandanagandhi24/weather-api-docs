@@ -52,6 +52,8 @@ The following example retrieves the current weather information for Delhi in Fah
 GET https://api.openweathermap.org/data/2.5/weather?q=Delhi&units=imperial&appid=YOUR_API_KEY
 ```
 
+> **Note:** Replace `YOUR_API_KEY` with your actual OpenWeatherMap API key.
+
 ## Example Response
 
 The following example shows a successful response returned by the Current Weather endpoint.
