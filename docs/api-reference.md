@@ -27,9 +27,16 @@ GET https://api.openweathermap.org/data/2.5/weather?q=Delhi&units=metric&appid=Y
 | Parameter | Type | Required | Description |
 |----------|-------|----------|-------------|
 | `q` | String | Yes | Name of the city for which weather information is requested |
-| `units` | String | No | Specifies the unit system. Supported values are `standard` for Kelvin, `metric` for Celsius, and `imperial` for Fahrenheit. Defaults to `standard` if omitted. |
+| `units` | String | No | Specifies the unit system. Supported values are listed below. Defaults to `standard` if omitted. |
 | `appid` | String | Yes | API key used to authenticate the request. |
 
+### Temperature Units
+
+| Value | Units |
+|-------|-------|
+| `standard` | Kelvin |
+| `metric` | Celsius |
+| `imperial` | Fahrenheit |
 
 ## Example Request
 
