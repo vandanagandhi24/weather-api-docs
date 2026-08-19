@@ -1,0 +1,227 @@
+openapi: 3.0.3
+
+info:
+  title: Weather API
+  description: API for retrieving current weather information for a specified location.
+  version: 1.0.0
+
+servers:
+  - url: https://api.openweathermap.org
+    description: OpenWeatherMap API
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: appid
+
+  schemas:
+    WeatherResponse:
+      type: object
+      properties:
+        coord:
+          type: object
+          properties:
+            lon:
+              type: number
+              format: double
+            lat:
+              type: number
+              format: double
+
+        weather:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              main:
+                type: string
+              description:
+                type: string
+              icon:
+                type: string
+
+        base:
+          type: string
+
+        main:
+          type: object
+          required:
+            - temp
+            - humidity
+          properties:
+            temp:
+              type: number
+            feels_like:
+              type: number
+            temp_min:
+              type: number
+            temp_max:
+              type: number
+            pressure:
+              type: integer
+            humidity:
+              type: integer
+            sea_level:
+              type: integer
+            grnd_level:
+              type: integer
+
+        visibility:
+          type: integer
+
+        wind:
+          type: object
+          properties:
+            speed:
+              type: number
+            deg:
+              type: integer
+            gust:
+              type: number
+
+        clouds:
+          type: object
+          properties:
+            all:
+              type: integer
+
+        dt:
+          type: integer
+
+        sys:
+          type: object
+          properties:
+            country:
+              type: string
+            sunrise:
+              type: integer
+            sunset:
+              type: integer
+
+        timezone:
+          type: integer
+
+        id:
+          type: integer
+
+        name:
+          type: string
+
+        cod:
+          type: integer
+
+    ErrorResponse:
+      type: object
+      properties:
+        cod:
+          type: integer
+        message:
+          type: string
+
+paths:
+  /data/2.5/weather:
+    get:
+      summary: Get current weather
+      description: Returns current weather information for a specified location.
+
+      security:
+        - apiKey: []
+
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Name of the city for which weather information is requested.
+          example: Delhi
+
+        - name: units
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - standard
+              - metric
+              - imperial
+            default: standard
+          description: Specifies the unit system. Use standard for Kelvin, metric for Celsius, or imperial for Fahrenheit.
+          examples:
+            metric:
+              summary: Celsius
+              value: metric
+            imperial:
+              summary: Fahrenheit
+              value: imperial
+
+      responses:
+        '200':
+          description: Successful response containing current weather information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+              example:
+                coord:
+                  lon: 77.2167
+                  lat: 28.6667
+                weather:
+                  - id: 804
+                    main: Clouds
+                    description: overcast clouds
+                    icon: 04d
+                base: stations
+                main:
+                  temp: 30.59
+                  feels_like: 36.24
+                  temp_min: 30.59
+                  temp_max: 30.59
+                  pressure: 999
+                  humidity: 69
+                  sea_level: 999
+                  grnd_level: 975
+                visibility: 10000
+                wind:
+                  speed: 3.84
+                  deg: 105
+                  gust: 3.4
+                clouds:
+                  all: 100
+                dt: 1785912974
+                sys:
+                  country: IN
+                  sunrise: 1785888871
+                  sunset: 1785937187
+                timezone: 19800
+                id: 1273294
+                name: Delhi
+                cod: 200
+
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+        '404':
+          description: Requested location was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                cod: "404"
+                message: "city not found"
