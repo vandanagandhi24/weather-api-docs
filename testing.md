@@ -365,10 +365,9 @@ The `openapi.yaml` file was validated using **Swagger Editor**.
 
 ### Validation Result
 
-* The OpenAPI specification loaded successfully.
-* No validation errors were reported.
-* No validation warnings were reported.
-* The defined API endpoint and parameters were recognized successfully.
+- The OpenAPI specification loaded successfully.
+- No validation errors were reported.
+- No validation warnings were reported.
 
 The Swagger validation confirms that the OpenAPI specification is structurally valid. Functional API behavior was tested separately using Postman.
 
