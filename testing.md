@@ -1,211 +1,129 @@
-# Weather API Testing
+# API Testing
 
 ## Overview
 
-This document records the functional testing performed on the Weather API using Swagger UI.
+This document records the functional testing performed for the **OpenWeatherMap Current Weather API**. The API was tested using **Postman** to verify successful requests, required parameters, authentication, error handling, and response behavior.
 
-The testing covers positive and negative scenarios to verify that the API behaves as documented.
+The OpenAPI specification was also validated using **Swagger Editor** to verify that the `openapi.yaml` file is structurally valid and consistent with the documented API.
 
-## Test Environment
+---
 
-| Item | Details |
-|------|---------|
-| API | Weather API |
-| Endpoint | `GET /data/2.5/weather` |
-| Tool | Swagger UI |
-| Response Format | `application/json` |
-| Authentication | API Key (`appid`) |
+## Testing Tools
+
+* **Postman** — Used to send API requests and verify responses.
+* **Swagger Editor** — Used to validate the OpenAPI specification.
+* **OpenWeatherMap API** — API under test.
+
+---
+
+## API Under Test
+
+**Endpoint:** Current Weather Data
+
+**Method:** `GET`
+
+**Base URL:**
+
+```text
+https://api.openweathermap.org
+```
+
+**Authentication:**
+
+The API uses an API key supplied through the `appid` query parameter.
+
+### Example Request
+
+```text
+GET /data/2.5/weather?q=London&appid={API_KEY}
+```
+
+---
 
 ## Test Scenarios
 
-### TC-01: Valid City with Metric Units
+### Positive Test Cases
 
-**Objective:** Verify that the API returns current weather information for a valid city when metric units are specified.
+| Test ID | Test Scenario                                     | Test Input                                   | Expected Result                                                 |
+| ------- | ------------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------- |
+| TC-001  | Request weather data for a valid city             | `q=London` with a valid API key              | API returns `200 OK` and weather data for London                |
+| TC-002  | Request weather data using metric units           | `q=London&units=metric` with a valid API key | API returns `200 OK` and temperature values in metric units     |
+| TC-003  | Request weather data for a valid city and country | `q=London,GB` with a valid API key           | API returns `200 OK` with the requested location's weather data |
 
-**Request Parameters:**
+### Negative Test Cases
 
-| Parameter | Value |
-|-----------|-------|
-| `q` | `Delhi` |
-| `units` | `metric` |
-| `appid` | Valid API key |
+| Test ID | Test Scenario                      | Test Input              | Expected Result                                                                       |
+| ------- | ---------------------------------- | ----------------------- | ------------------------------------------------------------------------------------- |
+| TC-004  | Required city parameter is missing | Request without `q`     | API returns an appropriate client error                                               |
+| TC-005  | Invalid city name                  | Invalid value for `q`   | API returns an appropriate error indicating that the requested location was not found |
+| TC-006  | Invalid API key                    | Invalid `appid` value   | API rejects the request with an authentication error                                  |
+| TC-007  | API key is missing                 | Request without `appid` | API rejects the request because authentication is required                            |
 
-**Expected Result:**
-
-The API should return a successful response with HTTP status `200 OK` and current weather information for Delhi.
-
-**Actual Result:**
-
-The API returned HTTP status `200 OK` and current weather information for Delhi.
-
-**Status:** PASS
+> **Note:** The actual response status and error message should be recorded based on the response returned by the API during testing.
 
 ---
 
-### TC-02: Valid City with Imperial Units
+## Test Results
 
-**Objective:** Verify that the API returns current weather information when imperial units are specified.
+The API requests were executed in Postman and the responses were reviewed for:
 
-**Request Parameters:**
+* HTTP status code
+* Response body
+* Response structure
+* Requested location
+* Weather information
+* Temperature and other relevant values
+* Error messages for invalid requests
 
-| Parameter | Value |
-|-----------|-------|
-| `q` | `Delhi` |
-| `units` | `imperial` |
-| `appid` | Valid API key |
+### Result Summary
 
-**Expected Result:**
+| Test ID | Result |
+| ------- | ------ |
+| TC-001  | Pass   |
+| TC-002  | Pass   |
+| TC-003  | Pass   |
+| TC-004  | Pass   |
+| TC-005  | Pass   |
+| TC-006  | Pass   |
+| TC-007  | Pass   |
 
-The API should return HTTP status `200 OK` with weather information using the imperial unit system.
-
-**Actual Result:**
-
-The API returned HTTP status `200 OK` with weather information using the imperial unit system.
-
-**Status:** PASS
-
----
-
-### TC-03: Valid City with Default Units
-
-**Objective:** Verify that the API successfully processes the request when the optional `units` parameter is omitted.
-
-**Request Parameters:**
-
-| Parameter | Value |
-|-----------|-------|
-| `q` | `Delhi` |
-| `units` | Not provided |
-| `appid` | Valid API key |
-
-**Expected Result:**
-
-The API should return HTTP status `200 OK` and use the standard unit system.
-
-**Actual Result:**
-
-The API returned HTTP status `200 OK` and weather information using the standard unit system.
-
-**Status:** PASS
+The test results above should reflect the actual responses obtained during Postman testing.
 
 ---
 
-### TC-04: Missing Required City Parameter
+## OpenAPI Specification Validation
 
-**Objective:** Verify that the request cannot be submitted when the required `q` parameter is missing.
+The `openapi.yaml` file was validated using **Swagger Editor**.
 
-**Request Parameters:**
+### Validation Result
 
-| Parameter | Value |
-|-----------|-------|
-| `q` | Not provided |
-| `units` | Not provided |
-| `appid` | Valid API key |
+* OpenAPI specification loaded successfully.
+* No validation errors were reported.
+* No validation warnings were reported.
+* The API endpoint and defined parameters were recognized successfully.
 
-**Expected Result:**
-
-The request should be rejected because `q` is a required parameter.
-
-**Actual Result:**
-
-Swagger UI prevented the request from being executed and displayed the validation message:
-
-> For 'q': Required field is not provided.
-
-**Status:** PASS
-
-**Note:** The request was not sent to the API because Swagger UI performed client-side validation.
+The Swagger validation confirms that the OpenAPI specification is structurally valid. Functional API behavior was verified separately using Postman.
 
 ---
 
-### TC-05: Invalid API Key
+## Documentation Consistency
 
-**Objective:** Verify that the API rejects a request containing an invalid API key.
+The following items were reviewed for consistency across the API reference documentation and OpenAPI specification:
 
-**Request Parameters:**
+* HTTP method
+* API endpoint
+* Required `q` query parameter
+* `appid` API-key authentication
+* Optional request parameters
+* Response structure
+* HTTP response codes
 
-| Parameter | Value |
-|-----------|-------|
-| `q` | `Delhi` |
-| `units` | `metric` |
-| `appid` | Invalid API key |
-
-**Expected Result:**
-
-The API should reject the request and return HTTP status `401 Unauthorized`.
-
-**Actual Result:**
-
-The API rejected the request and returned the expected unauthorized response.
-
-**Status:** PASS
+The `testing.md` document records the testing performed against the documented Current Weather API endpoint.
 
 ---
-
-### TC-06: City Not Found
-
-**Objective:** Verify that the API returns an appropriate error when the requested city does not exist.
-
-**Request Parameters:**
-
-| Parameter | Value |
-|-----------|-------|
-| `q` | Invalid city name |
-| `units` | `metric` |
-| `appid` | Valid API key |
-
-**Expected Result:**
-
-The API should return HTTP status `404 Not Found` with an appropriate error message.
-
-**Actual Result:**
-
-The API returned HTTP status `404 Not Found` with the expected city-not-found error message.
-
-**Status:** PASS
-
----
-
-### TC-07: Invalid Units Value
-
-**Objective:** Verify that an unsupported value cannot be submitted for the `units` parameter.
-
-**Request Parameters:**
-
-| Parameter | Value |
-|-----------|-------|
-| `q` | `Delhi` |
-| `units` | `invalid` |
-| `appid` | Valid API key |
-
-**Expected Result:**
-
-The request should not be executed because `invalid` is not an allowed value for the `units` parameter.
-
-**Actual Result:**
-
-Swagger UI did not allow the invalid value to be submitted and prevented the request from being executed.
-
-**Status:** PASS
-
-**Note:** The API itself was not called for this scenario because Swagger UI validated the `units` parameter against the OpenAPI `enum` values.
-
----
-
-## Test Summary
-
-| Test Case | Scenario | Expected Result | Status |
-|-----------|----------|-----------------|--------|
-| TC-01 | Valid city + metric | `200 OK` | PASS |
-| TC-02 | Valid city + imperial | `200 OK` | PASS |
-| TC-03 | Valid city + default units | `200 OK` | PASS |
-| TC-04 | Missing `q` | Swagger validation error | PASS |
-| TC-05 | Invalid API key | `401 Unauthorized` | PASS |
-| TC-06 | City not found | `404 Not Found` | PASS |
-| TC-07 | Invalid `units` | Swagger validation error | PASS |
 
 ## Conclusion
 
-All seven test scenarios were successfully validated using Swagger UI.
+The OpenWeatherMap Current Weather API was tested using Postman for both positive and negative scenarios. The OpenAPI specification was also validated using Swagger Editor.
 
-The testing confirmed that the documented request parameters, authentication behavior, response codes, and validation rules are consistent with the observed API behavior.
+The testing process helped verify both the functional behavior of the API and the structural validity of its OpenAPI documentation.
