@@ -2,14 +2,17 @@
 
 ## Overview
 
-This repository contains API documentation for the **Current Weather** endpoint of the OpenWeatherMap API. It demonstrates API documentation best practices using Markdown, OpenAPI 3.0.3, Postman, Git, and GitHub.
+This repository contains technical documentation for the **Current Weather** endpoint of the OpenWeatherMap API.
+
+The project demonstrates practical API documentation and testing using **Markdown, OpenAPI 3.0.3, Postman, Swagger Editor, Git, and GitHub**.
 
 ## Project Objectives
 
-- Document the Current Weather endpoint
+- Document the Current Weather API endpoint
+- Create an API reference using Markdown
 - Test API requests using Postman
-- Write API reference documentation
-- Create an OpenAPI 3.0.3 specification
+- Create and validate an OpenAPI 3.0.3 specification
+- Document positive and negative API test scenarios
 
 ## Technologies Used
 
@@ -22,9 +25,9 @@ This repository contains API documentation for the **Current Weather** endpoint 
 
 ## Repository Structure
 
-- `docs/` – API documentation pages
+- `docs/` – API documentation
 - `openapi/` – OpenAPI specification
 - `postman/` – Postman collection
-- `examples/` – Sample requests and responses
+- `examples/` – API examples
 - `screenshots/` – Postman testing screenshots
 - `testing.md` – Functional API testing documentation
