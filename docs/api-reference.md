@@ -120,8 +120,8 @@ The following table describes the most commonly used fields returned in the resp
 | `base` | string | Internal parameter used by the API. | `stations` |
 | `main.temp` | number | Current temperature. | `30.59` |
 | `main.feels_like` | number | Perceived temperature based on weather conditions. | `36.24` |
-| `main.temp_min` | number | Minimum recorded temperature. | `30.59` |
-| `main.temp_max` | number | Maximum recorded temperature. | `30.59` |
+| `main.temp_min` | number | Minimum temperature observed for the location. | `30.59` |
+| `main.temp_max` | number | Maximum temperature observed for the location. | `30.59` |
 | `main.pressure` | integer | Atmospheric pressure. | `999` |
 | `main.humidity` | integer | Relative humidity percentage. | `69` |
 | `main.sea_level` | integer | Atmospheric pressure at sea level. | `999` |
@@ -138,7 +138,7 @@ The following table describes the most commonly used fields returned in the resp
 | `timezone` | integer | Shift from UTC in seconds. | `19800` |
 | `id` | integer | Unique city identifier. | `1273294` |
 | `name` | string | Name of the requested location. | `Delhi` |
-| `cod` | integer | HTTP status code returned by the API. | `200` |
+| `cod` | integer | Response status code returned by the API. | `200` |
 
 ## Error Responses
 
@@ -146,13 +146,35 @@ The API returns standard HTTP status codes to indicate the success or failure of
 
 | Status Code | Description |
 |-------------|-------------|
-| `400 Bad Request` | Invalid request parameters. |
+| `400 Bad Request` | Invalid or missing request parameters. |
 | `401 Unauthorized` | Missing or invalid API key. |
 | `404 Not Found` | Requested location was not found. |
 
-### Example Error Response
+### 400 Bad Request
 
-The following response is returned when the specified city is not found.
+This response is returned when the required `q` parameter is missing.
+
+```json
+{
+    "cod": "400",
+    "message": "Nothing to geocode"
+}
+```
+
+### 401 Unauthorized
+
+This response is returned when the API key is missing or invalid.
+
+```json
+{
+    "cod": 401,
+    "message": "Invalid API key."
+}
+```
+
+### 404 Not Found
+
+This response is returned when the specified city or location cannot be found.
 
 ```json
 {

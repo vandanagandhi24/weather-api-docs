@@ -118,7 +118,9 @@ components:
       type: object
       properties:
         cod:
-          type: integer
+          oneOf:
+            - type: integer
+            - type: string
         message:
           type: string
 
@@ -208,6 +210,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              example:
+                cod: "400"
+                message: "Nothing to geocode"
 
         '401':
           description: Missing or invalid API key.
@@ -215,6 +220,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              example:
+                cod: 401
+                message: "Invalid API key."
 
         '404':
           description: Requested location was not found.
