@@ -28,6 +28,5 @@ The project demonstrates practical API documentation and testing using **Markdow
 - `docs/` – API documentation
 - `openapi/` – OpenAPI specification
 - `postman/` – Postman collection
-- `examples/` – API examples
 - `screenshots/` – Postman testing screenshots
 - `testing.md` – Functional API testing documentation

@@ -34,11 +34,12 @@ Include your API key in the `appid` query parameter with every request.
 **Example**
 
 ```text
-appid=YOUR_API_KEY
+appid=API_KEY
 ```
 
-> **Note:** Never expose your actual API key in public repositories. Always use `YOUR_API_KEY` as a placeholder in documentation.
+> **Note:** Never expose your actual API key in public repositories. Always use `API_KEY` as a placeholder in documentation.
 
+For more information, see the [Authentication](authentication.md) guide.
 ---
 
 ## First API Request
@@ -50,7 +51,7 @@ appid=YOUR_API_KEY
 ### Example Request
 
 ```http
-GET https://api.openweathermap.org/data/2.5/weather?q=Delhi&units=metric&appid=YOUR_API_KEY
+GET https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=API_KEY
 ```
 
 ---
@@ -59,9 +60,9 @@ GET https://api.openweathermap.org/data/2.5/weather?q=Delhi&units=metric&appid=Y
 
 | Parameter | Required | Description | Example |
 |-----------|----------|-------------|---------|
-| `q` | Yes* | Name of the city for which weather information is required. | `Delhi` |
+| `q` | Yes | Name of the city for which weather information is required. | `London` |
 | `units` | No | Specifies the unit system for temperature values. | `metric` |
-| `appid` | Yes | API key used to authenticate the request. | `YOUR_API_KEY` |
+| `appid` | Yes | API key used to authenticate the request. | `API_KEY` |
 
 ---
 
@@ -77,46 +78,54 @@ If the request is successful, the API returns:
 ```json
 {
     "coord": {
-        "lon": 77.2167,
-        "lat": 28.6667
+        "lon": -0.1257,
+        "lat": 51.5085
     },
     "weather": [
         {
-            "id": 804,
+            "id": 802,
             "main": "Clouds",
-            "description": "overcast clouds",
-            "icon": "04d"
+            "description": "scattered clouds",
+            "icon": "03d"
         }
     ],
     "base": "stations",
     "main": {
-        "temp": 34.09,
-        "feels_like": 39.65,
-        "temp_min": 34.09,
-        "temp_max": 34.09,
-        "pressure": 1002,
-        "humidity": 53,
-        "sea_level": 1002,
-        "grnd_level": 977
+        "temp": 17.07,
+        "feels_like": 16.66,
+        "temp_min": 15.57,
+        "temp_max": 18.26,
+        "pressure": 1021,
+        "humidity": 70,
+        "sea_level": 1021,
+        "grnd_level": 1017
     },
     "visibility": 10000,
     "wind": {
-        "speed": 2.63,
-        "deg": 98,
-        "gust": 1.67
+        "speed": 3.09,
+        "deg": 70
     },
     "clouds": {
-        "all": 100
+        "all": 40
     },
-    "dt": 1785827879,
+    "dt": 1787559272,
     "sys": {
-        "country": "IN",
-        "sunrise": 1785802437,
-        "sunset": 1785850831
+        "type": 2,
+        "id": 2075535,
+        "country": "GB",
+        "sunrise": 1787547613,
+        "sunset": 1787598363
     },
-    "timezone": 19800,
-    "id": 1273294,
-    "name": "Delhi",
+    "timezone": 3600,
+    "id": 2643743,
+    "name": "London",
     "cod": 200
 }
 ```
+---
+
+## Next Steps
+
+- See the [Authentication](authentication.md) guide for details about API key authentication.
+- See the [API Reference](api-reference.md) for endpoint parameters, response fields, and error responses.
+- See the [API Testing](../testing.md) documentation for Postman test scenarios and results.

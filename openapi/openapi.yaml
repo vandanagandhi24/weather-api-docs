@@ -95,6 +95,10 @@ components:
         sys:
           type: object
           properties:
+            type:
+              type: integer
+            id:
+              type: integer
             country:
               type: string
             sunrise:
@@ -140,7 +144,7 @@ paths:
           schema:
             type: string
           description: Name of the city for which weather information is requested.
-          example: Delhi
+          example: London
 
         - name: units
           in: query
@@ -170,38 +174,39 @@ paths:
                 $ref: '#/components/schemas/WeatherResponse'
               example:
                 coord:
-                  lon: 77.2167
-                  lat: 28.6667
+                  lon: -0.1257
+                  lat: 51.5085
                 weather:
-                  - id: 804
+                  - id: 802
                     main: Clouds
-                    description: overcast clouds
-                    icon: 04d
+                    description: scattered clouds
+                    icon: 03d
                 base: stations
                 main:
-                  temp: 30.59
-                  feels_like: 36.24
-                  temp_min: 30.59
-                  temp_max: 30.59
-                  pressure: 999
-                  humidity: 69
-                  sea_level: 999
-                  grnd_level: 975
+                  temp: 17.07
+                  feels_like: 16.66
+                  temp_min: 15.57
+                  temp_max: 18.26
+                  pressure: 1021
+                  humidity: 70
+                  sea_level: 1021
+                  grnd_level: 1017
                 visibility: 10000
                 wind:
-                  speed: 3.84
-                  deg: 105
-                  gust: 3.4
+                  speed: 3.09
+                  deg: 70
                 clouds:
-                  all: 100
-                dt: 1785912974
+                  all: 40
+                dt: 1787559272
                 sys:
-                  country: IN
-                  sunrise: 1785888871
-                  sunset: 1785937187
-                timezone: 19800
-                id: 1273294
-                name: Delhi
+                  type: 2
+                  id: 2075535
+                  country: GB
+                  sunrise: 1787547613
+                  sunset: 1787598363
+                timezone: 3600
+                id: 2643743
+                name: London
                 cod: 200
 
         '400':
