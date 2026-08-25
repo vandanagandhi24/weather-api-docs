@@ -25,7 +25,7 @@ The project demonstrates practical API documentation and testing using **Markdow
 
 ## Repository Structure
 
-- `docs/` – API documentation
+- `docs/` – Getting Started, Authentication, and API Reference documentation
 - `openapi/` – OpenAPI specification
 - `postman/` – Postman collection
 - `screenshots/` – Postman testing screenshots
