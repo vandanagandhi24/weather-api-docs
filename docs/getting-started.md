@@ -27,7 +27,7 @@ Before using the API, ensure you have the following:
 
 ## Authentication
 
-The OpenWeatherMap API uses **API Key Authentication**.
+The OpenWeatherMap API uses **API key authentication**.
 
 Include your API key in the `appid` query parameter with every request.
 
