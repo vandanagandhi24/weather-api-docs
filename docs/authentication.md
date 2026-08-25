@@ -2,7 +2,7 @@
 
 ## Overview
 
-The OpenWeatherMap Current Weather API uses **API Key Authentication** to authorize API requests. Every request must include a valid API key.
+The OpenWeatherMap Current Weather API uses **API key authentication** to authorize API requests. Every request must include a valid API key.
 
 Pass the API key using the `appid` query parameter.
 
