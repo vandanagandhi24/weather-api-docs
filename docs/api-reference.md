@@ -14,7 +14,7 @@ Use this endpoint to obtain weather details such as temperature, humidity, atmos
 | Base URL | `https://api.openweathermap.org` |
 | Endpoint | `/data/2.5/weather` |
 | Response Format | `application/json` |
-| Authentication | API Key (`appid`) |
+| Authentication | API key passed through the `appid` query parameter |
 
 ## Request URL
 
@@ -26,9 +26,9 @@ GET https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=
 
 | Parameter | Type | Required | Description |
 |----------|-------|----------|-------------|
-| `q` | String | Yes | Name of the city for which weather information is requested |
-| `units` | String | No | Specifies the unit system. Supported values are listed below. Defaults to `standard` if omitted. |
-| `appid` | String | Yes | API key used to authenticate the request. |
+| `q` | string | Yes | Name of the city for which weather information is requested |
+| `units` | string | No | Specifies the unit system. Supported values are listed below. Defaults to `standard` if omitted. |
+| `appid` | string | Yes | API key used to authenticate the request. |
 
 ### Temperature Units
 
