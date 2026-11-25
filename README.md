@@ -43,6 +43,21 @@ The following fields provide key weather details:
 | `wind.speed` | Wind speed. |
 
 **Note:** The temperature and wind speed units depend on the `units` parameter. If no unit is specified, the API uses its default units.
+## Understanding the API Response
+
+The Current Weather API returns weather information for the requested location.
+
+The following fields provide key weather details:
+
+| Field | Description |
+|---|---|
+| `name` | Name of the requested city. |
+| `main.temp` | Current temperature. |
+| `main.humidity` | Humidity percentage. |
+| `weather[0].description` | Description of the current weather conditions. |
+| `wind.speed` | Wind speed. |
+
+**Note:** The temperature and wind speed units depend on the `units` parameter. If no unit is specified, the API uses its default units.
 - `postman/` – Postman collection
 - `examples/` – Sample requests and responses
 - `images/` – Screenshots and diagrams
