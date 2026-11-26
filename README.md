@@ -28,5 +28,22 @@ The project demonstrates practical API documentation and testing using **Markdow
 - `docs/` – Getting Started, Authentication, and API Reference documentation
 - `openapi/` – OpenAPI specification
 - `postman/` – Postman collection
-- `screenshots/` – Postman testing screenshots
-- `testing.md` – Functional API testing documentation
+- `examples/` – Sample requests and responses
+- `images/` – Screenshots and diagrams
+
+## Understanding the API Response
+
+The Current Weather API returns weather information for the requested location.
+
+The following fields provide key weather details:
+
+| Field | Description |
+|---|---|
+| `name` | Name of the requested city. |
+| `main.temp` | Current temperature. |
+| `main.humidity` | Humidity percentage. |
+| `weather[0].description` | Description of the current weather conditions. |
+| `wind.speed` | Wind speed. |
+
+**Note:** The temperature and wind speed units depend on the `units` parameter. If no unit is specified, the API uses its default units.
+
