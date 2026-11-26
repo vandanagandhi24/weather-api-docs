@@ -1,0 +1,77 @@
+{
+  "info": {
+    "_postman_id": "b9feb95a-e6a9-43bd-bd59-b5334d17d4c5",
+    "name": "OpenWeatherMap API Documentation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43978022",
+    "_collection_link": "https://go.postman.co/collection/43978022-b9feb95a-e6a9-43bd-bd59-b5334d17d4c5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get Current Weather",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response is JSON\", function () {\r",
+              "    pm.response.to.be.json;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains temperature\", function () {\r",
+              "    const response = pm.response.json();\r",
+              "    pm.expect(response.main.temp).to.exist;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response contains city name\", function () {\r",
+              "    const response = pm.response.json();\r",
+              "    pm.expect(response.name).to.exist;\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.openweathermap.org/data/2.5/weather?q={{city}}&units={{units}}&appid={{api_key}}",
+          "protocol": "https",
+          "host": [
+            "api",
+            "openweathermap",
+            "org"
+          ],
+          "path": [
+            "data",
+            "2.5",
+            "weather"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "{{city}}"
+            },
+            {
+              "key": "units",
+              "value": "{{units}}"
+            },
+            {
+              "key": "appid",
+              "value": "{{api_key}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
